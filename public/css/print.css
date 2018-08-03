@@ -1,0 +1,32 @@
+/* Mobile stylesheet for Wind Travel */
+body{
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+#wrapper{
+  width: 100%;
+}
+
+/* Header is here */
+header{
+  height: 450px;
+}
+
+/* Items to hide */
+nav{
+  display:none;
+}
+footer{
+  display: none;
+}
+
+/* Content for Wind Travel */
+#content{
+  min-height: 500px;
+}
+
+/* Footer is here*/
+footer{
+  height: 200px;
+}

@@ -1,0 +1,25 @@
+
+/*service*/
+ #contentservice{
+      background-color: #fff;
+      min-height: 300px;
+      padding-top: 20px;
+      padding-left: 20px;
+      position: relative;
+    }
+ .titleservice{
+      float: left;
+      font-size: 18px;
+      width: 906px;
+      height: 30px;
+      background-color: #e20308;
+      margin-bottom: 15px;
+      padding-top: 10px;
+      padding-left: 15px;
+      color: #fff;
+    }
+ fieldset{
+      border: 2px solid #e20308;
+      margin-bottom: 20px;
+      width: 890px;
+    }

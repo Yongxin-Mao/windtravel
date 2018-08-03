@@ -1,0 +1,49 @@
+
+/*hotel*/
+#contenthotel{
+      min-height: 500px;
+      background-color: #fff;
+      padding: 20px;
+      position: relative;
+    }
+    
+    table{
+      width: 920px;
+      border-spacing: 0;
+      border-collapse: collapse;
+      background-color: #fff;
+      margin: auto;
+      }
+    table tr{
+      height: 30px;
+      border-bottom: 3px solid #666;
+    }
+    tr th{
+      background-color: #e20308;
+      color: #fff;
+      padding-top: 3px;
+    }
+    tr td img{
+      text-align: center;
+      margin: auto;
+    }
+    
+    tr td{
+      text-align: center;
+      margin: auto;
+    }
+    .buttonbuy{
+      width: 80px;
+      height: 25px;
+      background-color: #e20308;
+      color: #fff;
+      box-shadow: 2px 2px 2px rgba(150,150,150,0.4);
+      border-radius: 3px 3px;
+      font-weight: bold;
+      text-align: center;
+      padding-top: 8px;
+      margin: auto;
+    }
+    table tr td a{
+      text-decoration: none;
+    }

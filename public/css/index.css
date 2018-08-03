@@ -1,0 +1,132 @@
+/*index*/
+/* Here is working for buttons */
+    .button{
+      width: 80px;
+      height: 26px;
+      background-color: #e20308;
+      color: #fff;
+      box-shadow: 2px 2px 2px rgba(150,150,150,0.4);
+      border-radius: 0 14px 14px 0;
+      font-weight: bold;
+      text-align: center;
+      padding-top: 6px;
+      margin: auto;
+      position: absolute;
+      bottom: 0px;
+      right: -80px;
+    }
+    .button a{
+      text-decoration: none;
+      color: #fff;
+   }
+   
+   /* Header is about content */
+    #content{
+      background-color: #fff;
+      min-height: 500px;
+      padding-top: 20px;
+      padding-left: 0px;
+      padding-right: 0px;
+      position: relative;
+    }
+    .title{
+      float: left;
+      font-size: 18px;
+      width: 910px;
+      height: 30px;
+      background-color: #e20308;
+      margin-bottom: 15px;
+      padding-top: 10px;
+      padding-left: 10px;
+      margin-left: 20px;
+      margin-right: 20px;
+      color: #fff;
+    }
+    #content .box{
+      width: 215px;
+      height: 260px;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      float: left;
+      box-shadow: 6px 6px 10px rgba(150,150,150,0.5);
+      text-align: center;
+      text-shadow: 5px 5px 5px rgba(200,200,200,0.6);
+      line-height: 400px;
+      color: #fff;
+    }
+    #box1{
+      background-image: url(../images/MB.jpg);
+    }
+    #box2{
+      background-image: url(../images/TR.jpg);
+    }
+    #box3{
+      background-image: url(../images/OT.jpg);
+    }
+    #box4{
+      background-image: url(../images/VC.jpg);
+    }
+    #box5{
+      background-image: url(../images/hotel1.jpg);
+    }
+    #box6{
+      background-image: url(../images/hotel2.jpg);
+    }
+    #box7{
+      background-image: url(../images/hotel3.jpg);
+    }
+    #box8{
+      background-image: url(../images/hotel4.jpg);
+    }
+    #content .ball{
+      width: 120px;
+      height: 120px;
+      border-radius: 60px 60px;
+      margin-left: 34px;
+      margin-top: 20px;
+      margin-bottom: 35px;
+      float: left;
+      box-shadow: 0 10px 10px rgba(150,150,150,0.6);
+    }
+    #ball1{
+      background-image: url(../images/ball1.png);
+    }
+    #ball1:hover{
+      -webkit-transform: scale(1.1,1.1);
+      transform: scale(1.1,1.1);
+    }
+    #ball2{
+      background-image: url(../images/ball2.png);
+    }
+    #ball2:hover{
+      -webkit-transform: scale(1.1,1.1);
+      transform: scale(1.1,1.1);
+    }
+    #ball3{
+      background-image: url(../images/ball3.png);
+    }
+    #ball3:hover{
+      -webkit-transform: scale(1.1,1.1);
+      transform: scale(1.1,1.1);
+    }
+    #ball4{
+      background-image: url(../images/ball4.png);
+    }
+    #ball4:hover{
+      -webkit-transform: scale(1.1,1.1);
+      transform: scale(1.1,1.1);
+    }
+    #ball5{
+      background-image: url(../images/ball5.png);
+    }
+    #ball5:hover{
+      -webkit-transform: scale(1.1,1.1);
+      transform: scale(1.1,1.1);
+    }
+    #ball6{
+      background-image: url(../images/ball6.png);
+    }
+    #ball6:hover{
+      -webkit-transform: scale(1.1,1.1);
+      transform: scale(1.1,1.1);
+    }

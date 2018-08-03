@@ -1,0 +1,25 @@
+
+/*flight*/
+#contentflight{
+      background-color: #fff;
+      min-height: 300px;
+      padding-top: 20px;
+      padding-left: 20px;
+      position: relative;
+    }
+    #contentflight .company{
+      height: 300px;
+      width: 400px;
+      position: relative;
+      float: left;
+      margin: 20px 30px;
+    }
+    #contentflight .company > div{
+      position: absolute;
+      height: 50px;
+      width: 400px;
+      background-color: #c90408;
+      opacity: 0.8;
+      bottom: 0;
+      text-align: center;
+    }

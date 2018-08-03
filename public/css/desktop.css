@@ -1,0 +1,349 @@
+/* Desktop stylesheet for Wind Travel */
+#menulink{
+  display: none;
+}
+
+/* here is animation for logo */
+@-webkit-keyframes rotate{
+  0%{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  10%{
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  20%{
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  30%{
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+  }
+  45%{
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  60%{
+    -webkit-transform: rotate(225deg);
+    transform: rotate(225deg);
+  }
+  75%{
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+  90%{
+    -webkit-transform: rotate(315deg);
+    transform: rotate(315deg);
+  }
+  100%{
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate{
+  0%{
+    transform: rotate(0deg);
+  }
+  10%{
+    transform: rotate(45deg);
+  }
+  20%{
+    transform: rotate(90deg);
+  }
+  30%{
+    transform: rotate(135deg);
+  }
+  45%{
+    transform: rotate(180deg);
+  }
+  60%{
+   transform: rotate(225deg);
+  }
+  75%{
+   transform: rotate(270deg);
+  }
+  90%{
+    transform: rotate(315deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+#logo #wind{ 
+  -webkit-animation: rotate 2s ease-in-out infinite;
+  animation: rotate 2s ease-in-out infinite;
+}
+
+/* css for body */
+body{
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  background-color: #eee;
+  margin-top: 0;
+}
+
+/* css for wrapper */
+#wrapper{
+  background-color: #fff;
+  width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* css for header */
+header{
+  background-size:contain;
+  height: 450px;
+  background-repeat: no-repeat;
+  position: relative;
+}
+#searchbar{
+  position: absolute;
+  bottom: 80px;
+  right: 140px; 
+}
+#searchbar form input[id="search"]
+{
+  height: 30px;
+  border: 0;
+  border-radius: 15px 0 0 15px;
+}
+
+/* css for navigation*/
+nav{ 
+  height: 50px;
+  position: fixed;
+  top: 0;
+  background: linear-gradient(#999,#fff);
+  opacity: 0.8;
+  width: 960px;
+}
+
+#logo{
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+nav:hover{
+  opacity: 1;
+  background-color: #fff;
+}
+nav ul{
+  margin: 0;
+  padding: 0;
+  padding-left: 180px;
+  list-style-type: none;
+}
+nav ul li{
+  font-size: 20px;
+  display: inline-block;
+  margin-right: 2px;
+}
+nav ul li a{
+  text-decoration: none;
+  color: #000;
+  display: block;
+  width: 120px;
+  height: 39px;
+  text-align: center;
+  padding-top: 11px;
+}
+nav ul li a:hover{
+  color: #fff;
+  background-color: #e20308;
+  background-position: 0 -49px;
+  color: #fff;
+}
+
+nav ul li.flight2submenu{
+  position: relative;
+}
+nav ul li #flight_submenu li{
+  display: block;
+  margin: 0;
+  background: linear-gradient(#ccc,#eee);
+}
+nav ul li #flight_submenu li a{
+  font-size: 18px;
+  text-align: left;
+  height: 30px;
+  width: auto;
+  white-space:  nowrap;
+  padding-left: 15px;
+  padding-right: 20px;
+  padding-top: 14px;
+}
+nav ul li ul#flight_submenu{
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 120px;
+  clip: rect(0px, 10px, 10px, 0px);
+  overflow: hidden;
+  padding: 0px;
+  box-shadow: 0 10px 13px rgba(0,0,0,0.65);
+  background-color: #fff;
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  z-index: 1000;
+}
+
+nav ul li.flight2submenu:hover #flight_submenu{
+  clip: rect(-12px, 250px, 550px, -12px);
+  opacity: 1;
+}
+
+nav ul li.hotel2submenu{
+  position: relative;
+}
+nav ul li #hotel_submenu li{
+  display: block;
+  margin: 0;
+  background: linear-gradient(#ccc,#eee);
+}
+nav ul li #hotel_submenu li a{
+  font-size: 18px;
+  text-align: left;
+  height: 30px;
+  width: auto;
+  white-space:  nowrap;
+  padding-left: 15px;
+  padding-right: 20px;
+  padding-top: 14px;
+}
+nav ul li ul#hotel_submenu{
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 120px;
+  clip: rect(0px, 10px, 10px, 0px);
+  overflow: hidden;
+  padding: 0px;
+  box-shadow: 0 10px 13px rgba(0,0,0,0.65);
+  background-color: #fff;
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  z-index: 1000;
+}
+
+nav ul li.hotel2submenu:hover #hotel_submenu{
+  clip: rect(-12px, 250px, 550px, -12px);
+  opacity: 1;
+}
+
+/* Css for footer */
+footer{
+  background: linear-gradient(#666,#aaa);
+  height: 150px;
+  clear: both;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 12px;
+  line-height: 15px;
+}
+footer div{
+  width: 240px;
+  height: auto;
+  float: left;
+}
+footer div ul li{
+  list-style-type: none;
+}
+footer div ul li a{
+  text-decoration: none;
+  color: #fff;
+  font-weight: normal;
+}
+footer div#social{
+  width: 150px;
+  height: 40px;
+  margin: auto;
+}
+footer div.social{
+  width: 40px;
+  height: 50px;
+  float: left;
+  padding-left: 5px;
+}
+
+
+
+
+
+
+/* Media Queries for desktop */
+
+@media screen and (max-width: 959px){
+  #wrapper{
+    width: 100%;
+  }
+  div#content{
+    min-height: 1500px;
+  }
+  #content div.title{
+    width: 94%;
+  }
+  nav ul li a{
+    width: 110px;
+  }
+  #searchbar{
+  bottom: 70px;
+  right: 160px; 
+  }
+}
+@media screen and (max-width: 899px){
+  nav ul li a{   
+  width: 100px;  
+  }
+  
+ #searchbar{
+  bottom: 60px;
+  right: 150px; 
+  }
+}
+
+@media screen and (max-width: 840px){
+  nav ul li{
+    font-size: 18px;
+    margin-right: 1px;
+  }
+  nav ul li a{
+    width: 90px;
+  }
+  #searchbar{
+    bottom: 60px;
+    right: 150px; 
+  }
+}
+
+@media screen and (max-width: 790px){
+  #wrapper nav ul li a{
+    width: 85px;
+  }
+  nav ul li{
+    font-size: 16px;
+    margin-right: 0;
+  }
+  #searchbar{
+    bottom: 50px;
+    right: 140px; 
+  }
+}
+
+@media screen and (max-width: 768px){
+  nav ul{
+    padding-left: 150px;
+  }
+  #content .box{
+    margin-left: 80px;
+  }
+  #content div.ball{
+    margin-left: 70px;
+  }
+  #searchbar{
+    bottom: 40px;
+    right: 152px; 
+  }
+}
