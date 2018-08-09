@@ -50,7 +50,10 @@
       color: #fff;
       background: #e20308;
     }
-    
+    .errors{
+    color: #e20308;
+    font-size: 14px;
+    }
   </style>
   <?php if($slug=='home') : ?>
 

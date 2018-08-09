@@ -1,25 +1,61 @@
 
 /*service*/
  #contentservice{
-      background-color: #fff;
-      min-height: 300px;
-      padding-top: 20px;
-      padding-left: 20px;
-      position: relative;
-    }
- .titleservice{
-      float: left;
-      font-size: 18px;
-      width: 906px;
-      height: 30px;
-      background-color: #e20308;
-      margin-bottom: 15px;
-      padding-top: 10px;
-      padding-left: 15px;
-      color: #fff;
-    }
- fieldset{
-      border: 2px solid #e20308;
-      margin-bottom: 20px;
-      width: 890px;
-    }
+    background-color: #fff;
+    min-height: 300px;
+    padding-top: 20px;
+    padding-left: 20px;
+    position: relative;
+  }
+  .titleservice{
+    float: left;
+    font-size: 18px;
+    width: 906px;
+    height: 30px;
+    background-color: #e20308;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    padding-left: 15px;
+    color: #fff;
+  }
+  fieldset{
+    border: 2px solid #e20308;
+    margin-bottom: 20px;
+    width: 890px;
+  }
+  label{
+    display: inline-block;
+    width: 200px;
+    padding-left: 50px;
+    font-size: 18px;
+  }
+  #customer_info input[type="text"],
+  #customer_info input[type="password"]{
+    font-size: 16px;
+    padding-left: 15px;
+    width: 250px;
+  }
+  #customer_info input[type="submit"],
+  #customer_info input[type="reset"]{
+    font-size: 18px;
+    background-color: #e20308;
+    border: 2px solid #e20308;
+    background-position: left center;
+    width: 120px;
+    height: 35px;
+    color: #fff;
+  }
+  #customer_info input[type="submit"]:hover,
+  #customer_info input[type="reset"]:hover{
+    background-color: #fff;
+    border: 2px solid #e20308;
+    color: #e20308;
+  }
+  #button{
+    text-align: right;
+    padding-right: 12px;
+  }
+  .errors{
+    color: #e20308;
+    font-size: 14px;
+  }
