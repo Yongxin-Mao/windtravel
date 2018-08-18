@@ -8,8 +8,12 @@
  * @created_at 2018-08-02
  */
 
- 
-include ('../config.php');
+// include ('../config.php');  this is same with below
+include __DIR__ . '/../config.php';
+
+use \Classes\Utility\Validator;
+$v=new Validator();
+
 $title = 'home';
 $slug = 'home';
 

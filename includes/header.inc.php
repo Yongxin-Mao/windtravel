@@ -54,6 +54,11 @@
     color: #e20308;
     font-size: 14px;
     }
+    .errors2{
+    color: #666;
+    font-size: 12px;
+    margin-left: 255px;
+    }
   </style>
   <?php if($slug=='home') : ?>
 

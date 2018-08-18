@@ -2,16 +2,15 @@
 /**
  * PHP Capstone
  * @service page
- * @Assignment 1, WDD 2018
+ * @Assignment 1, Intermediate PHP WDD 2018
  * @Yongxin Mao <maoyongxin115@outlook.com>
- * @created_at 2018-08-02
+ * @created_at 2018-08-17
  */
 
  
 include ('../config.php');
-//require '../connect_db.inc.php';
-define('DB_USER','web_user');
-define('DB_PASS','mypass');
+define('DB_USER','root');
+define('DB_PASS','');
 define('DB_DSN','mysql:host=localhost;dbname=capstone');
 require '../includes/functions.php';
 $title = 'service';
@@ -22,50 +21,57 @@ include '../includes/header.inc.php';
 /*
 Registration Form
 */
+use \Classes\Utility\Validator;
+$v=new Validator();
 
 //test fot post request
 if($_SERVER['REQUEST_METHOD']=='POST'){
-  $errors=[];
+    $errors=[];
   //var_dump($_POST);
   //validate field for
     //required
     
-    $errors=required('first_name', $errors);
-    $errors=minLength('first_name', 2, $errors);
+    $v->required('first_name');
+    $v->checkLength('first_name',2,15);
+    $v->checkString1('first_name');
     
-    $errors=required('last_name', $errors);
-    $errors=minLength('last_name', 2, $errors);
+    $v->required('last_name');
+    $v->checkLength('last_name',2,15);
+    $v->checkString1('last_name');
     
-    $errors=required('street', $errors);
-    $errors=minLength('street', 2, $errors);
+    $v->required('street');
+    $v->checkLength('street',3,20);
+    $v->checkString2('street');
     
-    $errors=required('city', $errors);
-    $errors=minLength('city', 2, $errors);
+    $v->required('city');
+    $v->checkLength('city',3,20);
+    $v->checkString2('city');
     
-    $errors=required('postal_code', $errors);
-    $errors=minLength('postal_code', 6, $errors);
+    $v->required('postal_code');
+    $v->checkPostal('postal_code');
     
-    $errors=required('province', $errors);
-    $errors=minLength('province', 2, $errors);
+    $v->required('province');
+    $v->checkLength('province',2,15);
+    $v->checkString1('province');
     
-    $errors=required('country', $errors);
-    $errors=minLength('country', 2, $errors);
+    $v->required('country');
+    $v->checkLength('country',2,15);
+    $v->checkString1('country');
     
-    $errors=validateEmail($_POST['email'], 'email', $errors);
+    $v->validateEmail('email');
     
-    $errors=required('phone', $errors);
-    if(!is_numeric($_POST['phone'])){
-    $errors['phone'][]="Telephone should be numbers.";
-    }
+    $v->required('phone');
+    $v->checkTelephone('phone');
     
-    $errors=required('password', $errors);
-    $errors=minLength('password', 6, $errors);
-    $errors=passwordMatch('password', 'password_confirm', $errors);
-    
+    $v->required('password');
+    $v->checkPassword('password');
+    $v->checkLength('password',6,20);
+    $v->passwordMatch('password', 'password_confirm');
     
     
-    //var_dump($errors);
-    //min length
+    $errors=$v->errors();
+  
+    
   //if no errors
   if(count($errors)==0){
     //insert record in DB
@@ -124,9 +130,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       die('There is a problem inserting the record');
     }
     //end if
-  
 }//end test for post
 }
+    
 ?>
  
   <body>
@@ -304,13 +310,20 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		      <input type="password"
 					 name="password"
 				     id="password"
-                     placeholder="6 letters or numbers minimum..."/>
+                     placeholder="At least 6 characters long..."/>
             <?php if(!empty($errors['password'])):?>
             <span class="errors">
               <?=ucfirst(str_replace('_',' ',esc($errors['password'][0])))?>
             </span>
             <?php endif; ?>
 		    </p>
+            <?php if(!empty($errors['password'])):?>
+            <?php if($errors['password'][0]=="Sorry,your password is not secure enough!"):?>
+            <p class="errors2">
+              <?php echo '( Uppercase,lowercase,numbers are needed for security reasons.)';?>
+            </p>
+            <?php endif; ?>
+            <?php endif; ?>
             <p>
 		      <label for="password_confirm">Password Confirmation</label>
 		      <input type="password"
@@ -322,7 +335,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             
           <p id="button">
             <input type="submit" 
-                   value="Log In"
+                   value="Register"
                    class="button"
                    />&nbsp;&nbsp;
           </p><br/><br/>
@@ -335,8 +348,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       <?php foreach($customer as $key=>$value): ?>
          <p><?=$key?>: <?=$value?></p>
       <?php endforeach; ?>
+      </div>
   <?php endif; ?>
-    </div>
+    
       </div>
       
 <?php include '../includes/footer.inc.php'; ?>
