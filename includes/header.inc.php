@@ -51,13 +51,42 @@
       background: #e20308;
     }
     .errors{
-    color: #e20308;
-    font-size: 14px;
-    }
+      color: #e20308;
+      font-size: 14px;
+      }
     .errors2{
-    color: #666;
-    font-size: 12px;
-    margin-left: 255px;
+      color: #666;
+      font-size: 12px;
+      margin-left: 255px;
+      }
+    nav{
+      height: 75px;
+    }
+    #logo{
+      top: 25px;
+    }
+    nav ul{
+      margin-top: 25px;
+      margin-left: 25px;
+    }
+
+    #utility{
+      position: absolute;
+      top: 0;
+      height: 23px;
+      width: 925px;
+      background: #ddd;
+      text-align: right;
+      padding-right: 35px;
+      padding-top: 2px;
+    }
+    nav ul li ul#flight_submenu{
+      top: 25px;
+      left: -25px;
+    }
+    nav ul li ul#hotel_submenu{
+      top: 25px;
+      left: -25px;
     }
   </style>
   <?php if($slug=='home') : ?>

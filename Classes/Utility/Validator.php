@@ -22,7 +22,7 @@ class Validator
   public function validateEmail($field_name)
   {
     if(!filter_input(INPUT_POST, $field_name, FILTER_VALIDATE_EMAIL)){
-      $this->errors[$field_name]="Please enter a valide email address.";
+      $this->errors[$field_name][]="Please enter a valide email address.";
     }
   }
   

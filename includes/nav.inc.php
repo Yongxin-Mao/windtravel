@@ -1,5 +1,12 @@
-
+      
       <nav>
+        <div id="utility" style="background: #666; color:#fff;">
+          <?php if(empty($_SESSION['logged_in'])):?>
+            <a href="login.php" style="color: #fff; text-decoration: none;">Login</a> | <a href="service.php" style="color: #fff; text-decoration: none;">Register</a>
+          <?php else:?>
+            <a href="logout.php" style="color: #fff; text-decoration: none;">Logout</a> | <a href="profile.php" style="color: #fff; text-decoration: none;">Profile</a>
+          <?php endif;?>
+        </div>
         <!--Logo is here-->
         <div id="logo">
           <img id="wind" src="images/logo.png" alt="logo"/><img src="images/logo2.png" alt="logo"/>

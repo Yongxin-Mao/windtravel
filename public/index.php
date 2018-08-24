@@ -10,7 +10,7 @@
 
 // include ('../config.php');  this is same with below
 include __DIR__ . '/../config.php';
-
+require ('../database/connect_db.inc.php');
 use \Classes\Utility\Validator;
 $v=new Validator();
 

@@ -8,10 +8,8 @@
  */
 
  
-include ('../config.php');
-define('DB_USER','root');
-define('DB_PASS','');
-define('DB_DSN','mysql:host=localhost;dbname=capstone');
+require ('../config.php');
+require ('../database/connect_db.inc.php');
 require '../includes/functions.php';
 $title = 'service';
 $slug = 'service';
@@ -97,11 +95,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       ':country'=>$_POST['country'],
       ':phone'=>$_POST['phone'],
       ':email'=>$_POST['email'],
-      ':password'=>$_POST['password']
-    );
+      ':password'=>password_hash($_POST['password'],PASSWORD_DEFAULT)
+      );
     //execute query
     //if insert secceful
     if($stmt->execute($params)){
+      //set session
+      
+      $_SESSION['logged_in']='true';
+      //set a session message....success
+      //redirect to profile
+      
       //get last insert id
       $id=$dbh->lastInsertId();
       //create query to select new record
@@ -123,16 +127,24 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       //execute query
       $stmt->execute();
       //fetch results
-      $customer=$stmt->fetch(PDO::FETCH_ASSOC);
+      $user=$stmt->fetch(PDO::FETCH_ASSOC);
       //set boolean flag
+      $_SESSION['username']=$user['First Name'].' '.$user['Last Name'];
+      $_SESSION['street']=$user['Street'];
+      $_SESSION['city']=$user['City'];
+      $_SESSION['province']=$user['Province'];
+      $_SESSION['country']=$user['Country'];
+      $_SESSION['postal_code']=$user['Postal Code'];
+      $_SESSION['phone']=$user['Phone'];
+      $_SESSION['email']=$user['E-mail'];
+      session_regenerate_id();
       $success=true;
     }else{
       die('There is a problem inserting the record');
     }
     //end if
-}//end test for post
+  }//end test for post
 }
-    
 ?>
  
   <body>
@@ -285,7 +297,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                      ?>"/>
             <?php if(!empty($errors['email'])):?>
             <span class="errors">
-              <?=esc($errors['email'])?>
+              <?=esc($errors['email'][0])?>
             </span>
             <?php endif; ?>
 		    </p>
@@ -345,7 +357,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       <h1>Thank you for registering!</h1>
       <p><b>You submitted the following information:</b></p>
    
-      <?php foreach($customer as $key=>$value): ?>
+      <?php foreach($user as $key=>$value): ?>
          <p><?=$key?>: <?=$value?></p>
       <?php endforeach; ?>
       </div>
