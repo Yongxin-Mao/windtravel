@@ -27,7 +27,7 @@ include '../includes/header.inc.php';
     <div id="wrapper">
       <header>
         <img src="images/bg1.jpg" alt="Rocky Mountains" />
-        <div id="searchbar">
+        <!--<div id="searchbar">
           <form>
             <input type="text"
                    id="search"
@@ -35,10 +35,10 @@ include '../includes/header.inc.php';
                    size="30"
                    placeholder="   Find your dream place..."
             />
-            <div class="button"><a href="#" title="search">Search</a></div>
+            <div class="button" style="opacity: 1;"><a href="#" title="search">Search</a></div>
           </form>
 
-        </div>
+        </div>-->
       </header>
       
 <?php include '../includes/nav.inc.php'; ?>

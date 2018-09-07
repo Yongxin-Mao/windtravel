@@ -1,3 +1,9 @@
+commit 6df8038e813aa0080ba89b50a86f1c4775ea6c1b
+Author: Your Name <you@example.com>
+Date:   Fri Aug 24 00:11:19 2018 -0500
+
+    INTERMEDIATE PHP ASSIGNMENT 2 FINAL
+
 commit 9d709c62c5ddf85bec8fdda8e44a0d89c1ba9c04
 Author: Your Name <you@example.com>
 Date:   Fri Aug 17 22:59:02 2018 -0500

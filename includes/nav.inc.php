@@ -5,7 +5,8 @@
             <a href="login.php" style="color: #fff; text-decoration: none;">Login</a> | <a href="service.php" style="color: #fff; text-decoration: none;">Register</a>
           <?php else:?>
             <a href="logout.php" style="color: #fff; text-decoration: none;">Logout</a> | <a href="profile.php" style="color: #fff; text-decoration: none;">Profile</a>
-          <?php endif;?>
+          <?php endif;?>&nbsp;
+            <a href="cart.php"><img src="images/cart.png" height="28" width="35" alt="cart"/></a>
         </div>
         <!--Logo is here-->
         <div id="logo">

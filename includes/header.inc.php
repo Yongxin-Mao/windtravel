@@ -60,25 +60,30 @@
       margin-left: 255px;
       }
     nav{
-      height: 75px;
+      height: 82px;
     }
     #logo{
-      top: 25px;
+      top: 32px;
     }
     nav ul{
-      margin-top: 25px;
+      margin-top: 32px;
       margin-left: 25px;
     }
 
     #utility{
       position: absolute;
       top: 0;
-      height: 23px;
+      height: 30px;
       width: 925px;
       background: #ddd;
       text-align: right;
       padding-right: 35px;
       padding-top: 2px;
+     
+    }
+    #utility img{
+       vertical-align: middle;
+       top: 0;
     }
     nav ul li ul#flight_submenu{
       top: 25px;
@@ -88,6 +93,17 @@
       top: 25px;
       left: -25px;
     }
+    /*#searchbar{
+      width: 550px;
+      height: 150px;
+      border: 1px solid #000;
+      position: absolute;
+      vertical-align: middle;
+      left: 22%;
+      border-radius: 10px 10px;
+      background: #666;
+      opacity: 0.6;
+   }
   </style>
   <?php if($slug=='home') : ?>
 
