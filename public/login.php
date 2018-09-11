@@ -12,7 +12,10 @@ if(!empty($_SESSION['logout'])){
 	$flash_message = $_SESSION['logout'];
 	unset($_SESSION['logout']);
 }
-
+if(!empty($_SESSION['fail'])){
+	$flash_message = $_SESSION['fail'];
+	unset($_SESSION['fail']);
+}
 use \Classes\Utility\Validator;
 $v=new Validator();
 
@@ -33,7 +36,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   $dbh=new PDO(DB_DSN, DB_USER, DB_PASS);
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $query='select
-              customer.id,
+              customer.customer_id,
               customer.first_name,
               customer.password,
               customer.email
@@ -50,7 +53,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $_SESSION['logged_in']=true;
     $_SESSION['success']="Welcome back, ".ucfirst($user['first_name']).". You have successfully
 logged in.";
-    $_SESSION['user_id']=$user['id'];
+    $_SESSION['user_id']=$user['customer_id'];
     session_regenerate_id();
     header('Location: profile.php');
     die;
@@ -71,7 +74,7 @@ logged in.";
       <!-- header begins-->
       <header style="height: 300px;">
         <img src="images/service.jpg" alt="Servicess" />
-        <div id="searchbar"></div>
+    
       </header>
       
 <?php include '../includes/nav.inc.php'; ?>

@@ -1,13 +1,14 @@
 <?php
-
+//here let the page show the error report
 ini_set('display_errors', 1);
 ini_set('error_reporting()', E_ALL);
-
+//set the session start for every pages.
 session_start();
+//start the buffer
 ob_start();
-
+//define the path
 define('APP',__DIR__);
-
+//create the function that load the class file automatically
 function autoload($className)
 {
     $className = ltrim($className, '\\');

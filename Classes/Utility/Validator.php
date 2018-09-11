@@ -109,7 +109,17 @@ class Validator
       $this->errors[$field_name][]="Sorry, postal code should be correct format.";
     }
   }
-  
+  /*create a function for checking the field that only can be numbers.
+  *this is for card number and secure code.
+  */
+  public function checkNumber($field_name)
+  {
+    $pattern='/[0-9]/';
+    $string=$_POST[$field_name];
+    if(preg_match($pattern,$string,$matches)===0){
+      $this->errors[$field_name][]="Sorry, here should be only numbers.";
+    }
+  }
   /**
   *@return
   */

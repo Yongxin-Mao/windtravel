@@ -21,7 +21,7 @@ header('Location: login.php');
       <!-- header begins-->
       <header style="height: 300px;">
         <img src="images/service.jpg" alt="Servicess" />
-        <div id="searchbar"></div>
+        
       </header>
       
 <?php include '../includes/nav.inc.php'; ?>

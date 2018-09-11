@@ -21,9 +21,7 @@ include '../includes/header.inc.php';
     <div id="wrapper">
       <header>
       <img src="images/flightbg.jpg" alt="Flight Background" />
-      <div id="searchbar">
         
-      </div>
       </header>
       
 <?php include '../includes/nav.inc.php'; ?>

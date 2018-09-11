@@ -21,9 +21,7 @@ include '../includes/header.inc.php';
     <div id="wrapper">
       <header>
       <img src="images/restbg.jpg" alt="Restaurants" />
-      <div id="searchbar">
-        
-      </div>
+     
       </header>
       
 <?php include '../includes/nav.inc.php'; ?>

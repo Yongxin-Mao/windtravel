@@ -110,6 +110,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       $id=$dbh->lastInsertId();
       //create query to select new record
       $query="SELECT 
+              customer.customer_id,
               customer.first_name as 'First Name',
               customer.last_name as 'Last Name',
               customer.street as 'Street',
@@ -119,16 +120,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
               customer.country as 'Country',
               customer.phone as 'Phone',
               customer.email as 'E-mail'
-              FROM customer where id=:id";
+              FROM customer where customer_id=:customer_id";
       //prepare query to select record you just inserted
       $stmt=$dbh->prepare($query);
       //bindValue
-      $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+      $stmt->bindValue(':customer_id', $customer_id, PDO::PARAM_INT);
       //execute query
       $stmt->execute();
       //fetch results
       $user=$stmt->fetch(PDO::FETCH_ASSOC);
       //set boolean flag
+      $_SESSION['customer_id']=$user['customer_id'];
       $_SESSION['username']=$user['First Name'].' '.$user['Last Name'];
       $_SESSION['street']=$user['Street'];
       $_SESSION['city']=$user['City'];
@@ -154,7 +156,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       <!-- header begins-->
       <header>
         <img src="images/guidance.jpg" alt="Servicess" />
-        <div id="searchbar"></div>
+        
       </header>
       
 <?php include '../includes/nav.inc.php'; ?>
@@ -253,7 +255,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             <?php endif; ?>
 		    </p>
             <p>
-		      <label for="provice">Provice</label>
+		      <label for="province">Provice</label>
 		      <input type="text"
 					 name="province"
 				     id="province"

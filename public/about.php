@@ -3,9 +3,9 @@
 /**
  * PHP Capstone
  * @about page
- * @Assignment 1, WDD 2018
+ * @capstone, WDD 2018
  * @Yongxin Mao <maoyongxin115@outlook.com>
- * @created_at 2018-08-02
+ * @created_at 2018-09-11
  */
 
  
@@ -22,7 +22,7 @@ include '../includes/header.inc.php';
     <div id="wrapper">
       <header>
         <img src="images/aboutus.jpg" alt="about us" />
-        <div id="searchbar"></div>
+        
       </header>
       
 <?php include '../includes/nav.inc.php'; ?>

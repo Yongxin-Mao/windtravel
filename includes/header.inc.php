@@ -7,7 +7,7 @@
 //                                                     //
 //            (^_^)       (∩_∩)       (¯▽¯)            //
 //            Lovely       可 爱      かわいい           //
-//                 Capstone HTML/CSS                   //
+//               Capstone HTML/CSS/PHP                 //
 //                     Yongxin Mao                     //
 //                                                     //
 //                                                     //
@@ -69,7 +69,6 @@
       margin-top: 32px;
       margin-left: 25px;
     }
-
     #utility{
       position: absolute;
       top: 0;
@@ -79,21 +78,20 @@
       text-align: right;
       padding-right: 35px;
       padding-top: 2px;
-     
     }
     #utility img{
        vertical-align: middle;
        top: 0;
     }
     nav ul li ul#flight_submenu{
-      top: 25px;
+      top: 18px;
       left: -25px;
     }
     nav ul li ul#hotel_submenu{
-      top: 25px;
+      top: 18px;
       left: -25px;
     }
-    /*#searchbar{
+    #searchbar{
       width: 550px;
       height: 150px;
       border: 1px solid #000;
@@ -103,8 +101,9 @@
       border-radius: 10px 10px;
       background: #666;
       opacity: 0.6;
-   }
+    }
   </style>
+  <!--PHP conditional for different page using different css file-->
   <?php if($slug=='home') : ?>
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />

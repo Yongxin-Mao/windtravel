@@ -5,6 +5,7 @@ require ('../config.php');
 require ('../database/connect_db.inc.php');
 $title = 'login';
 $slug = 'service';
+
 if(!empty($_SESSION['success'])) {
 	$flash_message = $_SESSION['success'];
 	unset($_SESSION['success']);
@@ -23,11 +24,12 @@ $dbh=new PDO(DB_DSN, DB_USER, DB_PASS);
               customer.phone as 'Phone',
               customer.email as 'E-mail'
               from customer
-              where id=:id";
-  $params=array(':id'=>$_SESSION['user_id']);
+              where customer_id=:customer_id";
+  $params=array(':customer_id'=>$_SESSION['user_id']);
   $stmt=$dbh->prepare($query);
   $stmt->execute($params);
   $user=$stmt->fetch(PDO::FETCH_ASSOC);
+  
 }
 
 include '../includes/header.inc.php'; 
@@ -43,7 +45,7 @@ include '../includes/header.inc.php';
       <!-- header begins-->
       <header style="height: 300px;">
         <img src="images/service.jpg" alt="Servicess" />
-        <div id="searchbar"></div>
+        
       </header>
       
 <?php include '../includes/nav.inc.php'; ?>
