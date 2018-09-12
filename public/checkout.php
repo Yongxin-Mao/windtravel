@@ -88,15 +88,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       
       session_regenerate_id();
       $success=true;
-      $_SESSION['cart']=array();
+      //$_SESSION['cart']=array();
     }else{
       die('There is a problem inserting the record');
     }
     //end if
   }//end test for post
 }
-//var_dump($_SESSION);
-//var_dump($_SESSION['cart']);
+var_dump($_SESSION);
+var_dump($cart);
+var_dump($customer);
+
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -277,9 +279,34 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <?php else: ?>
       <div style="width: 920px;text-align:center; margin-top:80px;">
       <h1>Thank you for booking our hotel!</h1>
-      <p><b>You submitted the order successfully!</b></p>
-   
-      
+      <p><b>Your purchasing is completely!</b></p>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Customer</th>
+          <th>Email</th>
+          <th>Hotel</th>
+          <th>Address</th>
+          <th>Price</th>
+          <th>GST</th>
+          <th>PST</th>
+          <th>Total</th>
+        </tr>
+        <?php foreach($cart as $value):?>
+        <tr>
+          <td><?=$customer['customer_id']?></td>
+          <td><?=$customer['first_name']?> <?=$customer['last_name']?></td>
+          <td><?=$customer['email']?></td>
+          <td><?=$_SESSION['cart'][$_SESSION['hotel_id']]['hotel_brand']?></td>
+          <td><?=$_SESSION['cart'][$_SESSION['hotel_id']]['hotel_name']?></td>
+          <td><?=$_SESSION['cart'][$_SESSION['hotel_id']]['price']?></td>
+          <td>0.05</td>
+          <td>0.08</td>
+          <td><?=$_SESSION['total']?></td>
+        </tr>
+      <?php endforeach;?>
+      </table>
+    
       </div>
     <?php endif; ?>
       

@@ -31,6 +31,8 @@ function getRandom($dbh, $limit)
     image
 	FROM
 	hotel
+    WHERE
+    deleted='0'
 	ORDER BY RAND()
 	LIMIT :limit";
 	$stmt = $dbh->prepare($query);

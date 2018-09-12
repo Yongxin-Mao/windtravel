@@ -139,7 +139,7 @@ if (!empty($_SESSION['cart'])) {
       </table>  
       
       <form action="checkout.php">
-		<input type="hidden" name="hotel_id"/>
+		<input type="hidden" value="<?=$value['hotel_id']?>"/>
 		<button class="buttonbuy" type="submit" style="width:100px;height:35px;margin-bottom: 50px;">Checkout</button>
       </form>
       <?php endif; ?>

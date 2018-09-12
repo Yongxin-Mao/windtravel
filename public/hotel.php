@@ -150,13 +150,7 @@ if(!empty($_GET['hotel_brand'])){
       #livesearch ul li a:hover{
         color: #09d;
       }
-      #search_list{
-        position: absolute;
-        border: 1px solid #a5acb2;
-        width: 1000px;
-        height: 1100px;
-        visibility: hidden;
-      }
+      
 </style>
   <body>
     <!-- Start "wrapper" div. This will contain the entire web page.-->

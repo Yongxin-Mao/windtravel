@@ -27,7 +27,7 @@
         <div>
           <ul>
             <li><a href="#"><b>Links</b></a></li>
-            <li><a href="admin/index.php">Administration</a></li>
+            <li><a href="admin/public/index.php">Administration</a></li>
             <li><a href="#">Destination Canada</a></li>
             <li><a href="#">Tourism Winnipeg</a></li>
           </ul>
