@@ -97,10 +97,10 @@ $hotelbycity=getHotelByCity($dbh,$hotel['city']);
       <!-- content begins-->
       <div id="contentservice">
       <!--show the hotels list view by using php-->
-      <div class="titleservice">Welcome to <?=$hotel['hotel_brand']?></div>
+      <div class="titleservice">Welcome to <?=str_replace('_',' ',$hotel['hotel_brand'])?></div>
       <?php if(!empty($flash_message)) echo "<h3 style='text-align=center; color:#f00;'>Hi, $flash_message</h3>"; ?>
       <div id="head">
-        <img src="images/<?=$hotel['image']?>" alt="hotel"/>
+        <img src="images/<?=$hotel['image']?>.jpg" alt="hotel"/>
         <div>
           <p><?=$hotel['hotel_brand']?></p>
           <p><?=$hotel['hotel_name']?></p>
@@ -165,10 +165,10 @@ $hotelbycity=getHotelByCity($dbh,$hotel['city']);
      
       <div id="others">
       <fieldset>
-      <legend>Other Hotels of <?=$hotel['hotel_brand']?></legend>
+      <legend>Other Hotels of <?=str_replace('_',' ',$hotel['hotel_brand'])?></legend>
       <?php foreach($hotelbybrand as $hotels):?>
       <div class="entity">
-        <a href="detail.php?hotel_id=<?=$hotel['hotel_id']?>"><img src="images/<?=$hotels['image']?>" alt="hotel"/></a>
+        <a href="detail.php?hotel_id=<?=$hotel['hotel_id']?>"><img src="images/<?=$hotels['image']?>.jpg" alt="hotel"/></a>
         <div><?=$hotels['hotel_brand']?></div>
         <div><?=$hotels['hotel_name']?></div>
         <div>Price: $<?=$hotels['price']?> | Rank: <?=$hotels['rank']?></div>
@@ -180,7 +180,7 @@ $hotelbycity=getHotelByCity($dbh,$hotel['city']);
       <legend>Other Hotels in <?=$hotel['city']?></legend>
       <?php foreach($hotelbycity as $hotel):?>
       <div class="entity">
-        <a href="detail.php?hotel_id=<?=$hotel['hotel_id']?>"><img src="images/<?=$hotel['image']?>" alt="hotel"/></a>
+        <a href="detail.php?hotel_id=<?=$hotel['hotel_id']?>"><img src="images/<?=$hotel['image']?>.jpg" alt="hotel"/></a>
         <div><?=$hotel['hotel_brand']?></div>
         <div><?=$hotel['hotel_name']?></div>
         <div>Price: $<?=$hotel['price']?> | Rank: <?=$hotel['rank']?></div>

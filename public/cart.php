@@ -127,7 +127,7 @@ if (!empty($_SESSION['cart'])) {
       
       <?php foreach($_SESSION['cart'] as $value):?>
       <tr>
-        <td><a href="detail.php?hotel_id=<?=$value['hotel_id']?>"><img src="images/<?=$value['image']?>"\></a></td>
+        <td><a href="detail.php?hotel_id=<?=$value['hotel_id']?>"><img src="images/<?=$value['image']?>.jpg"\></a></td>
         <td><?=str_replace('_',' ',$value['hotel_brand'])?>,<?=$value['hotel_name']?></td>
         <td id="price" value="<?=$value['price']?>"><?=$value['price']?></td>
         <td><input id="num" type="number" min="1" max="99" placeholder="1" style="width: 30px;" onchange="showPrice(this.value)"/></td>

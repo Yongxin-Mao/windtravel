@@ -1,3 +1,4 @@
+<!--This is the header of all pages in Admin-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -4,10 +4,16 @@
 //load models
 require '../database/hotel_model.php';
 //cart model
+
+//define constants
 define('PST',.08);
 define('GST',.05);
 
-//add an item to the cart and set the session for reusing
+/**
+* Add hotel item to the cart
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function addToCart($dbh,$hotel_id)
 {
   $hotel=getHotel($dbh,$hotel_id);
@@ -25,6 +31,11 @@ function addToCart($dbh,$hotel_id)
   //$_SESSION['cart']=$cart;
   return $cart;
 }
+/**
+* Getinvoice info by invoice brand
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function getInvoice($dbh, $invoice_id)
 {
 	$query = "SELECT

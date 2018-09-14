@@ -1,11 +1,11 @@
 <?php
 
-// Book model
+// Hotel model
 
 /**
-* Get random books for home page
+* Get random hotels
 * @param $dbh PDO database handle
-* @param $limit Int Number of books
+* @param $limit Int Number of hotels
 * @return Array result
 */
 function getRandom($dbh, $limit)
@@ -43,9 +43,8 @@ function getRandom($dbh, $limit)
 }
 
 /**
-* Get single book by id
+* Get single hotel
 * @param $dbh PDO database handle
-* @param $book_id Int Book id
 * @return Array result
 */
 function getHotel($dbh, $hotel_id)
@@ -82,7 +81,11 @@ function getHotel($dbh, $hotel_id)
 	return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-
+/**
+* Get a hotel by hotel brand
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function getHotelByBrand($dbh, $hotel_brand)
 {
 	$query = "SELECT
@@ -110,7 +113,11 @@ function getHotelByBrand($dbh, $hotel_brand)
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	
 }
-
+/**
+* Get a hotel by city which hotel located
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function getHotelByCity($dbh, $city)
 {
 	$query = "SELECT
@@ -138,7 +145,11 @@ function getHotelByCity($dbh, $city)
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	
 }
-
+/**
+* Get several hotels by hotel brand
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function getHotelsByBrand($dbh, $hotel_brand)
 {
 	$query = "SELECT
@@ -176,6 +187,11 @@ function getHotelsByBrand($dbh, $hotel_brand)
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	
 }
+/**
+* Get several hotels by city which hotels located
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function getHotelsByCity($dbh, $city)
 {
 	$query = "SELECT
@@ -213,7 +229,11 @@ function getHotelsByCity($dbh, $city)
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	
 }
-
+/**
+* Get several hotels by hotel rank
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function getHotelsByRank($dbh, $rank)
 {
 	$query = "SELECT
@@ -251,6 +271,12 @@ function getHotelsByRank($dbh, $rank)
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	
 }
+
+/**
+* Search a hotel which march the keyword
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function search($dbh,$keyword)
 {
     $query = "SELECT
@@ -283,10 +309,8 @@ function search($dbh,$keyword)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 /**
-* Get books by publisher
+* Get customer info by cutomer_id
 * @param $dbh PDO database handle
-* @param $publisher_id Int Publiser ID
-* @param $limit Int Number of books
 * @return Array result
 */
 function getCustomer($dbh, $customer_id)

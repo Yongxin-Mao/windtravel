@@ -1,8 +1,14 @@
 <?php
-
+/**
+ * PHP Capstone Admin 
+ * @admin main page---login.php
+ * @capstone, WDD 2018
+ * @Yongxin Mao <maoyongxin115@outlook.com>
+ * @created_at 2018-09-14
+ */
 require ('../config.php');
 require ('../database/connect_db.inc.php');
-require '../includes/functions.php';
+
 $title = 'login';
 $slug = 'service';
 
@@ -46,7 +52,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $_SESSION['logged_in']=true;
     $_SESSION['success']="Hi, my dear admin. You have successfully logged in.";
     $_SESSION['user_id']=$user['admin_id'];
-    session_regenerate_id();
+    //session_regenerate_id();
     header('Location: index.php');
     die;
   }else{

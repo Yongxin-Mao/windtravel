@@ -1,9 +1,9 @@
 <?php
 
 /**
-* Get random books for home page
+* Get random hotels for hotel page
 * @param $dbh PDO database handle
-* @param $limit Int Number of books
+* @param $limit Int Number of hotes
 * @return Array result
 */
 function getHotels($dbh)
@@ -36,6 +36,11 @@ function getHotels($dbh)
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);	
 }
 
+/**
+* Delete hotel with soft delete
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function delHotel($dbh)
 {
 	$query = "UPDATE
@@ -51,9 +56,9 @@ function delHotel($dbh)
 	
 }
 /**
-* Get single book by id
+* Get single hotel by id
 * @param $dbh PDO database handle
-* @param $book_id Int Book id
+* @param $book_id Int hotel id
 * @return Array result
 */
 function getHotel($dbh, $hotel_id)
@@ -90,6 +95,11 @@ function getHotel($dbh, $hotel_id)
 	return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+/**
+* Create a new record of hotel for
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function createHotel($dbh)
 {
   $query="INSERT INTO
@@ -177,7 +187,11 @@ function createHotel($dbh)
       return false;
     }
 }
-
+/**
+* Modify the record of hotel for
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function updateHotel($dbh)
 {
   $query="UPDATE
@@ -234,14 +248,57 @@ function updateHotel($dbh)
     if($stmt->execute($params)){
       //set session
       $_SESSION['update']="You've update hotel record successfully.";
-     
+      return true;
     }else{
       return false;
     }
 }
+/**
+* Show the Aggregate data about database
+* @param $dbh PDO database handle
+* @return Array result
+*/
+function showData($dbh)
+{
+  $query="SELECT
+          MAX(hotel.price) as max,
+          MIN(hotel.price) as min,
+          FORMAT(AVG(hotel.price),2) as avg,
+          COUNT(DISTINCT hotel.hotel_id) as hotels,
+          COUNT(DISTINCT customer.customer_id) as customers,
+          COUNT(DISTINCT invoice.invoice_id) as invoices,
+          MAX(invoice.total_price) as max_pay,
+          MIN(invoice.total_price) as min_pay,
+          FORMAT(AVG(invoice.total_price),2) as avg_pay,
+          SUM(invoice.total_price) as sum
+          FROM
+          hotel,customer,invoice";
+    //prepare query
+  $stmt=$dbh->prepare($query);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+}
 
-
-
+/**
+* Show the newest record of inserted hotels 
+* @param $dbh PDO database handle
+* @return Array result
+*/
+function showRecord($dbh)
+{
+  $query="SELECT
+          *
+          FROM
+          hotel
+          WHERE
+          hotel_id=(select MAX(hotel_id) from hotel)";
+    //prepare query
+  $stmt=$dbh->prepare($query);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+}
 //create the function that can escape the output
 function esc($string)
 {
@@ -253,7 +310,11 @@ function esc_attr($string)
   return htmlspecialchars($string, ENT_QUOTES, 'UTF-8', false);
 }
 
-
+/**
+* Search 5 hotels which can match the keyword 
+* @param $dbh PDO database handle
+* @return Array result
+*/
 function search($dbh,$keyword)
 {
     $query = "SELECT

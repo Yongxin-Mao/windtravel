@@ -135,7 +135,7 @@ logged in.";
             
             <p id="button" style="text-align: center; margin-top: 40px;">
             <input type="submit" 
-                   value="Logggin"
+                   value="Login"
                    class="button"
                    style="width: 300px;"
                    />&nbsp;&nbsp;

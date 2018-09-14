@@ -1,16 +1,20 @@
 <?php
 /**
- * PHP Capstone
- * @admin main page---index.php
+ * PHP Capstone Admin 
+ * @admin main page---product_new.php
  * @capstone, WDD 2018
  * @Yongxin Mao <maoyongxin115@outlook.com>
- * @created_at 2018-09-11
+ * @created_at 2018-09-14
  */
  
 require ('../config.php');
 require ('../database/connect_db.inc.php');
 require ('../model/model.php');
-
+if(!isset($_SESSION['logged_in'])){
+  $_SESSION['fail']="Sorry, You should login first.";
+  header('Location: login.php');
+  die;
+}
 /*
 Registration Form
 */
@@ -69,6 +73,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     
     $v->required('smoke_permit');
     
+    $v->required('image');
+    
     $v->required('on_maintain');
     
     $v->required('log');
@@ -80,7 +86,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   if(count($errors)==0){
     $result=createHotel($dbh);
     if($result){
+      $_SESSION['new']="You've inserted a new record!";
       $success=true;
+      header('Location: product.php');
     }else{
       die('There is a problem inserting the record');
     }

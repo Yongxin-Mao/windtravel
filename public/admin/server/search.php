@@ -1,12 +1,8 @@
 <?php
 //this is server file for search function
+require '../database/connect_db.inc.php';
   if(!empty($_GET['s'])){
-    define('DB_DSN', 'mysql:host=localhost;dbname=capstone');
-    define('DB_USER', 'root');
-    define('DB_PASS', '');
-
-    $dbh = new PDO(DB_DSN, DB_USER, DB_PASS);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+   
     $keyword=$_GET['s'];
     //query for keywords matching city or hotel brand
     $query = "SELECT

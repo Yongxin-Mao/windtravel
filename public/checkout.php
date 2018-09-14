@@ -93,7 +93,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      
       $_SESSION['invoice_id']=$id;
      
-      
+      $_SESSION['checkout']="Congratulations, your hotel order has been processed. Thank you for booking!";
       header('Location: thankyou.php');
       die;
       //$_SESSION['cart']=array();
@@ -194,7 +194,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       
       <?php foreach($cart as $value):?>
       <tr>
-        <td><a href="detail.php?hotel_id=<?=$value['hotel_id']?>"><img src="images/<?=$value['image']?>" style="height:30px;width:40px;"/></a></td>
+        <td><a href="detail.php?hotel_id=<?=$value['hotel_id']?>"><img src="images/<?=$value['image']?>.jpg" style="height:30px;width:40px;"/></a></td>
         <td><?=str_replace('_',' ',$value['hotel_brand'])?>,<?=$value['hotel_name']?></td>
         <td id="price"><?=$value['price']?></td>
         <td>1</td>

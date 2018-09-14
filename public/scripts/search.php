@@ -1,12 +1,14 @@
 <?php
+/**
+ * PHP Capstone 
+ * @server.php for searching function which outputs the results matching keywords
+ * @capstone, WDD 2018
+ * @Yongxin Mao <maoyongxin115@outlook.com>
+ * @created_at 2018-09-14
+ */
+require '../../database/connect_db.inc.php';
 //this is server file for search function
   if(!empty($_GET['s'])){
-    define('DB_DSN', 'mysql:host=localhost;dbname=capstone');
-    define('DB_USER', 'root');
-    define('DB_PASS', '');
-
-    $dbh = new PDO(DB_DSN, DB_USER, DB_PASS);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $keyword=$_GET['s'];
     //query for keywords matching city or hotel brand
     $query = "SELECT

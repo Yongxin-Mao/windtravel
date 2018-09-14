@@ -2,7 +2,7 @@
 
 /**
  * PHP Capstone
- * @checkout.php (which can process the payment and submit the invoice form)
+ * @thankyou.php (which can give the feedback when finished checkout)
  * @capstone, WDD 2018
  * @Yongxin Mao <maoyongxin115@outlook.com>
  * @created_at 2018-09-11
@@ -49,7 +49,10 @@ $v=new Validator();
   //end test for post
  
 
-
+if(!empty($_SESSION['checkout'])){
+	$flash_message = $_SESSION['checkout'];
+	unset($_SESSION['checkout']);
+}
 
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -119,16 +122,16 @@ $v=new Validator();
       
       <!-- content begins-->
       <div id="contentservice">
-      <div class="titleservice" style="text-align: center;">Invoice Service</div>
+      <div class="titleservice" style="text-align: center;">Customer Service</div>
       
       <div style="width: 920px; margin-top:80px;">
-      <h3>Thank you for booking our hotel!</h3>
+      <?php if(!empty($flash_message)) echo "<h3 style='text-align=center; color:#f00;'>Hi, $flash_message</h3>"; ?>
       <table>
         <caption id="invoice">INVOICE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         (Order ID: <?=str_replace($replace,'',$invoice['created_at'])?><?=$invoice['invoice_id']?>)</caption>
         <tr>
           <td style="text-align: left;">
-            <p><img src="images/<?=$invoice['image']?>" style="margin-left:40px;"/></p>
+            <p><img src="images/<?=$invoice['image']?>.jpg" style="margin-left:40px;"/></p>
             <ul>
               <li><b>Hotel:</b> <?=$invoice['hotel_brand']?><?=$invoice['hotel_name']?></li>
               <li><b>Room:</b> <?=$invoice['room']?></li>

@@ -230,8 +230,8 @@ if(!empty($_GET['hotel_brand'])){
           <!--show the all the detail of hotel using php -->
           <?php foreach($hotels as $value):?>
           <tr>
-            <td><a href="detail.php?hotel_id=<?php echo $value['hotel_id'];?>"><img src="images/<?=$value['image']?>" alt="hotel"/></a></td>
-            <td><a href="detail.php?hotel_id=<?php echo $value['hotel_id'];?>"><?php echo $value['hotel_brand'];?></a></td>
+            <td><a href="detail.php?hotel_id=<?php echo $value['hotel_id'];?>"><img src="images/<?=$value['image']?>.jpg" alt="hotel"/></a></td>
+            <td><a href="detail.php?hotel_id=<?php echo $value['hotel_id'];?>"><?php echo str_replace('_',' ',$value['hotel_brand']);?></a></td>
             <td><?php echo $value['bed'];?></td>
             <td><?php echo $value['street'].' , '.$value['city'];?></td>
             <td><?php echo $value['rank'];?></td>

@@ -33,7 +33,7 @@ if(!empty($_POST['hotel_id'])){
   $_SESSION['hotel_id']=$_POST['hotel_id'];
   $_SESSION['cart'][0]=$cart;
   //set the flash message content
-  $_SESSION['addtocart']="You add an item in your cart successfully!";
+  $_SESSION['addtocart']="You add an item in your cart successfully! <a href='hotel.php'>Go on shopping</a> | <a href='cart.php'>Go to cart</a>";
   //$_POST['hotel_id']=array();
 }
 //go to the page where you from

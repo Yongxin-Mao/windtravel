@@ -1,16 +1,20 @@
 <?php
 /**
- * PHP Capstone
- * @admin main page---index.php
+ * PHP Capstone Admin 
+ * @admin main page---product_edt.php
  * @capstone, WDD 2018
  * @Yongxin Mao <maoyongxin115@outlook.com>
- * @created_at 2018-09-11
+ * @created_at 2018-09-14
  */
- 
+
 require ('../config.php');
 require ('../database/connect_db.inc.php');
 require ('../model/model.php');
-
+if(!isset($_SESSION['logged_in'])){
+  $_SESSION['fail']="Sorry, You should login first.";
+  header('Location: login.php');
+  die;
+}
 if(!empty($_GET['hotel_id'])){
 $hotel=getHotel($dbh,$_GET['hotel_id']);
 }
@@ -81,15 +85,16 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
    
   //if no errors
   if(count($errors)==0){
-      updateHotel($dbh);
+      if(updateHotel($dbh)){
       $_SESSION['update']="You've updated your record successfully!";
       $success=true;
-    }else{
+      header('Location: product.php');
+      }else{
       die('There is a problem inserting the record');
     }
     //end if
   }//end test for post
-
+}
 
 ?>
 <?php require '../includes/header.inc.php'?>
