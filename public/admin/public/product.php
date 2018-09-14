@@ -20,103 +20,7 @@ if(!empty($_GET['s'])) {
   $hotels=getHotels($dbh);
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Wind Travel Admin</title>
-  <meta charset="utf-8" />
-  <style>
-    body{
-      width: 1000px;
-      margin: 0 auto;
-    }
-    h1{
-      background: #0bb;
-      text-align: center;
-      padding: 35px 0;
-      height: 70px;
-      margin: 0;
-    }
-    #menu{
-      background: #ccc;
-      height: 580px;
-      width: 155px;
-      padding: 2px 20px;
-      float: left;
-    }
-    #menu a{
-      text-decoration: none;
-      color: #000;
-    }
-    #menu a:hover{
-      color: #099;
-    }
-    #content{
-      margin-left: 220px;
-    }
-    li{
-      font-size: 18px;
-      line-height: 25px;
-    }
-    #title{
-      text-align: center;
-    }
-    table{
-      width: 760px;
-      border-collapse: collapse;
-      text-align: center;
-    }
-    tr,th,td{
-      border: 1px solid #333;
-      height: 21px;
-    }
-    .button{
-      display: inline-block;
-      border: 1px solid #666;
-      background: #ccc;
-      width: 55px;
-      height: 19px;
-      padding-top: 2px;
-      border-radius: 3px 3px;
-    }
-    a{
-      text-decoration: none;
-      color: #000;
-    }
-    #search{
-      margin-bottom: 50px;
-      float: right;
-      margin-right: 50px;
-      position: relative;
-    }
-    #livesearch{
-        position: absolute;
-        border: 1px solid #a5acb2;
-        width: 243px;
-        height: 140px;
-        right: 0px;
-        background: #fff;
-        visibility: hidden;
-      }
-     #button{
-       height: 22px;
-       width: 80px;
-     }
-      #livesearch ul{
-        list-style: none;
-        margin: 6px 10px;
-        padding: 0;
-      }
-      #livesearch ul li a{
-        text-decoration: none;
-        color: #000;
-        font-size: 14px;
-        
-      }
-      #livesearch ul li a:hover{
-        color: #09d;
-      }
-  </style>
+<?php require '../includes/header.inc.php'?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
@@ -163,30 +67,67 @@ if(!empty($_GET['s'])) {
     }
 
   </script>
-</head>
-
-<body>
-  <h1>Administration Center for Wind Travel</h1>
-  <div id="menu">
-    <h1 style="height: 35px; width:134px; padding:10px;"><a href="index.php">Home</a></h1>
-    <h2><a>Hotels</a></h2>
-    <ul>
-      <li><a href="product.php">List ALL</a></li>
-      <li><a href="product_new.php">Create New</a></li>
-    </ul>
-    <h2><a>Customers</a></h2>
-    <ul>
-      <li><a href="#">List ALL</a></li>
-      <li><a href="#">Create New</a></li>
-    </ul>
-    <h2><a>Invoices</a></h2>
-    <ul>
-      <li><a href="#">List ALL</a></li>
-      <li><a href="#">Create New</a></li>
-    </ul>
-  </div>
-  
-  <div id="content">
+  <style>
+  table{
+      width: 760px;
+      border-collapse: collapse;
+      text-align: center;
+    }
+    tr,th,td{
+      border: 1px solid #333;
+      height: 21px;
+    }
+    .button{
+      display: inline-block;
+      border: 1px solid #666;
+      background: #ccc;
+      width: 55px;
+      height: 19px;
+      padding-top: 2px;
+      border-radius: 3px 3px;
+    }
+    a{
+      text-decoration: none;
+      color: #000;
+    }
+    #search{
+      margin-bottom: 20px;
+      float: right;
+      margin-right: 50px;
+      position: relative;
+    }
+    #livesearch{
+        position: absolute;
+        border: 1px solid #a5acb2;
+        width: 243px;
+        height: 130px;
+        right: 0px;
+        background: #fff;
+        visibility: hidden;
+      }
+     #button{
+       height: 22px;
+       width: 80px;
+     }
+      #livesearch ul{
+        list-style: none;
+        margin: 6px 10px;
+        padding: 0;
+      }
+      #livesearch ul li a{
+        text-decoration: none;
+        color: #000;
+        font-size: 14px;
+        
+      }
+      #livesearch ul li{
+        line-height: 20px;
+      }
+      #livesearch ul li a:hover{
+        color: #09d;
+      }
+      </style>
+  <div id="content"  style="margin-left: 220px;">
       <h2 id="title">Hotels List</h2>
       <div id="search_list"></div>
       <div id="search">

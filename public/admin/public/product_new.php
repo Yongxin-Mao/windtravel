@@ -66,15 +66,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $v->required('description');
     
     $v->required('breakfast_included');
-    $v->checkBool('breakfast_included');
     
     $v->required('smoke_permit');
-    $v->checkBool('smoke_permit');
-    
-    $v->required('image');
     
     $v->required('on_maintain');
-    $v->checkBool('on_maintain');
     
     $v->required('log');
     $v->checkLength('log',1,200);
@@ -94,48 +89,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Wind Travel Admin</title>
-  <meta charset="utf-8" />
+<?php require '../includes/header.inc.php'?>
   <style>
-    body{
-      width: 1000px;
-      margin: 0 auto;
-    }
-    h1{
-      background: #0bb;
-      text-align: center;
-      padding: 35px 0;
-      height: 70px;
-      margin: 0;
-    }
-    #menu{
-      background: #ccc;
-      height: 580px;
-      width: 155px;
-      padding: 2px 20px;
-      float: left;
-    }
-    #menu a{
-      text-decoration: none;
-      color: #000;
-    }
-    #menu a:hover{
-      color: #099;
-    }
-    #content{
-      margin-left: 220px;
-    }
-    li{
-      font-size: 18px;
-      line-height: 25px;
-    }
-    #title{
-      text-align: center;
-    }
-    table{
+  table{
       width: 760px;
       border-collapse: collapse;
       text-align: center;
@@ -144,51 +100,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       border: 1px solid #333;
       height: 21px;
     }
-    .button{
-      display: inline-block;
-      border: 1px solid #666;
-      background: #ccc;
-      width: 55px;
-      height: 19px;
-      padding-top: 2px;
-      border-radius: 3px 3px;
-    }
-    label{
-      width: 180px;
-      display: inline-block;
-    }
-    span{
-      color: #f00;
-      font-size: 14px;
-    }
   </style>
-  <script>
-
-  </script>
-</head>
-
-<body>
-  <h1>Administration Center for Wind Travel</h1>
-  <div id="menu">
-    <h1 style="height: 35px; width:134px; padding:10px;"><a href="index.php">Home</a></h1>
-    <h2><a>Hotels</a></h2>
-    <ul>
-      <li><a href="product.php">List ALL</a></li>
-      <li><a href="product_new.php">Create New</a></li>
-    </ul>
-    <h2><a>Customers</a></h2>
-    <ul>
-      <li><a href="#">List ALL</a></li>
-      <li><a href="#">Create New</a></li>
-    </ul>
-    <h2><a>Invoices</a></h2>
-    <ul>
-      <li><a href="#">List ALL</a></li>
-      <li><a href="#">Create New</a></li>
-    </ul>
-  </div>
-  
-  <div id="content">
+  <div id="content" style="margin-left: 220px;">
       <h2 id="title">Create New Hotel Record</h2>
       <?php if(!empty($flash_message)) echo "<h3 style='text-align=center; color:#f00;'>Hi, $flash_message</h3>"; ?>
       <?php if(empty($success)): ?>
@@ -428,13 +341,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         
         <p>
           <label for="breakfast_included">Breakfast</label>
-          <input type="text"
-                 name="breakfast_included"
-                 id="breakfast_included"
-                 value="<?php
-                 if(!empty($_POST['breakfast_included'])){
-                   echo esc_attr($_POST['breakfast_included']);
-                 }?>"/>
+          <input type="radio" name="breakfast_included" 
+                 value="Yes" <?php if(isset($_POST['breakfast_included'])&&$_POST['breakfast_included']=="Yes") 
+                 echo 'checked="checked"';?>/>Yes 
+          <input type="radio" name="breakfast_included" 
+                 value="No" <?php if(isset($_POST['breakfast_included'])&&$_POST['breakfast_included']=="No") 
+                 echo 'checked="checked"';?>/>No
         <?php if(!empty($errors['breakfast_included'])):?>
         <span class="errors">
           <?=ucfirst(str_replace('_',' ',esc($errors['breakfast_included'][0])))?>
@@ -444,13 +356,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         
         <p>
           <label for="smoke_permit">Smoke Permission</label>
-          <input type="text"
-                 name="smoke_permit"
-                 id="smoke_permit"
-                 value="<?php
-                 if(!empty($_POST['smoke_permit'])){
-                   echo esc_attr($_POST['smoke_permit']);
-                 }?>"/>
+          <input type="radio" name="smoke_permit" 
+                 value="Yes" <?php if(isset($_POST['smoke_permit'])&&$_POST['smoke_permit']=="Yes") 
+                 echo 'checked="checked"';?>/>Yes 
+          <input type="radio" name="smoke_permit" 
+                 value="No" <?php if(isset($_POST['smoke_permit'])&&$_POST['smoke_permit']=="No") 
+                 echo 'checked="checked"';?>/>No
         <?php if(!empty($errors['smoke_permit'])):?>
         <span class="errors">
           <?=ucfirst(str_replace('_',' ',esc($errors['smoke_permit'][0])))?>
@@ -459,12 +370,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         </p>
         
         <p>
-          <label for="image">Image</label>
-          <input type="text"
-                 name="image"
-                 id="image"
-                 value="<?php
-                 if(!empty($_POST['image'])){
+        <label for="image">Image Name</label>
+        <input type="text"
+               name="image"
+               id="image"
+               value="<?php if(!empty($_POST['image'])){
                    echo esc_attr($_POST['image']);
                  }?>"/>
         <?php if(!empty($errors['image'])):?>
@@ -476,13 +386,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         
         <p>
           <label for="on_maintain">Maintenance</label>
-          <input type="text"
-                 name="on_maintain"
-                 id="on_maintain"
-                 value="<?php
-                 if(!empty($_POST['on_maintain'])){
-                   echo esc_attr($_POST['on_maintain']);
-                 }?>"/>
+          <input type="radio" name="on_maintain" 
+                 value="Yes" <?php if(isset($_POST['on_maintain'])&&$_POST['on_maintain']=="Yes") 
+                 echo 'checked="checked"';?>/>Yes 
+          <input type="radio" name="on_maintain" 
+                 value="No" <?php if(isset($_POST['on_maintain'])&&$_POST['on_maintain']=="No") 
+                 echo 'checked="checked"';?>/>No
         <?php if(!empty($errors['on_maintain'])):?>
         <span class="errors">
           <?=ucfirst(str_replace('_',' ',esc($errors['on_maintain'][0])))?>

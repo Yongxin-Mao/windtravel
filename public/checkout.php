@@ -18,6 +18,7 @@ include '../includes/header.inc.php';
 
 //load models
 require '../database/cart_model.php';
+$replace=array(':','-',' ');
 //show the page before checking for login, if not logged in we should go to login page
 if(!isset($_SESSION['logged_in'])){
   $_SESSION['fail']="Sorry, You should login/register before checkout.";
@@ -64,14 +65,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     //create query
     $query="INSERT INTO
             invoice
-            (security_code,total_price,hotel_id,customer_id)
+            (security_code,price,GST,PST,total_price,hotel_id,customer_id)
             VALUES
-            (:security_code,:total_price,:hotel_id,:customer_id)";
+            (:security_code,:price,:GST,:PST,:total_price,:hotel_id,:customer_id)";
     //prepare query
     $stmt=$dbh->prepare($query);
     //bind values
     $params=array(
       ':security_code'=>$_POST['security'],
+      ':price'=>$_SESSION['cart'][0]['price'],
+      ':GST'=>GST,
+      ':PST'=>PST,
       ':total_price'=>$_SESSION['total'],
       ':hotel_id'=>$_SESSION['hotel_id'],
       ':customer_id'=>$_SESSION['user_id']
@@ -80,24 +84,31 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     //if insert secceful
     if($stmt->execute($params)){
       //set session
-      
+      unset($_SESSION['cart']);
       $_SESSION['logged_in']='true';
       //set a session message....success
       //redirect to profile
+      $id=$dbh->lastInsertId();
+      //create query to select new record
+     
+      $_SESSION['invoice_id']=$id;
+     
       
-      
-      session_regenerate_id();
-      $success=true;
+      header('Location: thankyou.php');
+      die;
       //$_SESSION['cart']=array();
     }else{
       die('There is a problem inserting the record');
     }
     //end if
+    
   }//end test for post
+ 
 }
-var_dump($_SESSION);
-var_dump($cart);
-var_dump($customer);
+ if(!empty($_SESSION['invoice_id'])){
+  $invoice=getInvoice($dbh,$_SESSION['invoice_id']);
+  unset($_SESSION['invoice_id']);
+}
 
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -142,6 +153,16 @@ var_dump($customer);
       text-align: center;
       width: 917px;
     }
+    #invoice{
+      background: #ccc;
+      height: 23px;
+      padding-top: 7px;
+      font-weight: bold;
+    }
+    ul{
+      list-style: none;
+    }
+    
  </style>
  <body>
     <!-- Start "wrapper" div. This will contain the entire web page.-->
@@ -174,11 +195,11 @@ var_dump($customer);
       <?php foreach($cart as $value):?>
       <tr>
         <td><a href="detail.php?hotel_id=<?=$value['hotel_id']?>"><img src="images/<?=$value['image']?>" style="height:30px;width:40px;"/></a></td>
-        <td><?=$value['hotel_brand']?>,<?=$value['hotel_name']?></td>
+        <td><?=str_replace('_',' ',$value['hotel_brand'])?>,<?=$value['hotel_name']?></td>
         <td id="price"><?=$value['price']?></td>
         <td>1</td>
-        <td>0.08</td>
-        <td>0.05</td>
+        <td><?=PST?></td>
+        <td><?=GST?></td>
         <td><?=$value['total']?></td>
       </tr>
       <?php endforeach;?>
@@ -214,97 +235,129 @@ var_dump($customer);
       </table>    
       
       
-        <form method="post"
-              action="checkout.php"
-              id="customer_info"
-              name="customer_info"
-              accept-charset="utf-8"
-              autocomplete="on"
-              novalidate>
-          
-            <legend>Payment Info</legend>
-            
-            <p>
-		      <label for="card_number">Card Number</label>
-		      <input type="text"
-					 name="card_number"
-				     id="card_number"
-                     value="<?php
-                     if(!empty($_POST['card_number'])){
-                       echo esc_attr($_POST['card_number']);
-                     }
-                     ?>"/>
-            <?php if(!empty($errors['card_number'])):?>
-            <span class="errors">
-              <?=ucfirst(str_replace('_',' ',esc($errors['card_number'][0])))?>
-            </span>
-            <?php endif; ?>
-		    </p>
-            <p>
-		      <label for="security">Security Code</label>
-		      <input type="text"
-					 name="security"
-				     id="security"
-                     value="<?php
-                     if(!empty($_POST['security'])){
-                       echo esc_attr($_POST['security']);
-                     }
-                     ?>"/>
-            <?php if(!empty($errors['security'])):?>
-            <span class="errors">
-              <?=ucfirst(str_replace('_',' ',esc($errors['security'][0])))?>
-            </span>
-            <?php endif; ?>
-		    </p>
-            <p>
-              <label for="expire">Expiration Date</label>
-              <input type="date"
-                     id="expire"
-                     name="expire"
-                     value="<?php
-                     if(!empty($_POST['expire'])){
-                       echo esc_attr($_POST['expire']);
-                     }
-                     ?>"/>
-            <?php if(!empty($errors['expire'])):?>
-            <span class="errors">
-              <?=ucfirst(str_replace('_',' ',esc($errors['expire'][0])))?>
-            </span>
-            <?php endif; ?>
-            </p>
-            
-          <button class="buttonbuy" type="submit" style="width:100px;height:35px;margin-bottom: 50px;float:right;margin-right:80px;">Submit</button>
-          
-        </form>
+      <form method="post"
+            action="checkout.php"
+            id="customer_info"
+            name="customer_info"
+            accept-charset="utf-8"
+            autocomplete="on"
+            novalidate>
+
+          <legend>Payment Info</legend>
+
+          <p>
+            <label for="card_number">Card Number</label>
+            <input type="text"
+                   name="card_number"
+                   id="card_number"
+                   value="<?php
+                   if(!empty($_POST['card_number'])){
+                     echo esc_attr($_POST['card_number']);
+                   }
+                   ?>"/>
+          <?php if(!empty($errors['card_number'])):?>
+          <span class="errors">
+            <?=ucfirst(str_replace('_',' ',esc($errors['card_number'][0])))?>
+          </span>
+          <?php endif; ?>
+          </p>
+          <p>
+            <label for="security">Security Code</label>
+            <input type="text"
+                   name="security"
+                   id="security"
+                   value="<?php
+                   if(!empty($_POST['security'])){
+                     echo esc_attr($_POST['security']);
+                   }
+                   ?>"/>
+          <?php if(!empty($errors['security'])):?>
+          <span class="errors">
+            <?=ucfirst(str_replace('_',' ',esc($errors['security'][0])))?>
+          </span>
+          <?php endif; ?>
+          </p>
+          <p>
+            <label for="expire">Expiration Date</label>
+            <input type="date"
+                   id="expire"
+                   name="expire"
+                   value="<?php
+                   if(!empty($_POST['expire'])){
+                     echo esc_attr($_POST['expire']);
+                   }
+                   ?>"/>
+          <?php if(!empty($errors['expire'])):?>
+          <span class="errors">
+            <?=ucfirst(str_replace('_',' ',esc($errors['expire'][0])))?>
+          </span>
+          <?php endif; ?>
+          </p>
+
+        <button class="buttonbuy" type="submit" 
+                style="width:100px;height:35px;margin-bottom: 50px;float:right;margin-right:80px;"
+                >Purchase</button>
+
+      </form>
     <?php else: ?>
-      <div style="width: 920px;text-align:center; margin-top:80px;">
-      <h1>Thank you for booking our hotel!</h1>
-      <p><b>Your purchasing is completely!</b></p>
+      <div style="width: 920px; margin-top:80px;">
+      <h3>Thank you for booking our hotel!</h3>
       <table>
+        <caption id="invoice">INVOICE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (Order ID: <?=str_replace($replace,'',$invoice['created_at'])?><?=$invoice['invoice_id']?>)</caption>
         <tr>
-          <th>ID</th>
-          <th>Customer</th>
-          <th>Email</th>
-          <th>Hotel</th>
-          <th>Address</th>
+          <td style="text-align: left;">
+            <p><img src="images/<?=$invoice['image']?>" style="margin-left:40px;"/></p>
+            <ul>
+              <li><b>Hotel:</b> <?=$invoice['hotel_brand']?><?=$invoice['hotel_name']?></li>
+              <li><b>Room:</b> <?=$invoice['room']?></li>
+              <li><b>Bed:</b> <?=$invoice['bed']?></li>
+              <li><b>Adults:</b> <?=$invoice['adults']?></li>
+              <li><b>Children:</b> <?=$invoice['children']?></li>
+              <li><b>Breakfast:</b> <?=$invoice['breakfast_included']?></li>
+              <li><b>Smoke Permission:</b> <?=$invoice['smoke_permit']?></li>
+              <li><b>Ranking:</b> <?=$invoice['rank']?></li>
+              <li><b>Address:</b> <?=$invoice['street']?>,<?=$invoice['city']?>,<?=$invoice['country']?></li>
+              <li><b>Telephone:</b> <?=$invoice['phone']?></li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+      
+      <table>
+        <caption>Customer Info</caption>
+        <tr>
+          <td style="text-align: left;">
+          <ul>
+            <li><b>Customer Name:</b> <?=$invoice['first_name']?> <?=$invoice['last_name']?></li>
+            <li><b>Street:</b> <?=$invoice['customer_street']?></li>
+            <li><b>City:</b> <?=$invoice['customer_city']?></li>
+            <li><b>Province:</b> <?=$invoice['customer_province']?></li>
+            <li><b>Country:</b> <?=$invoice['customer_country']?></li>
+            <li><b>Telephone:</b> <?=$invoice['customer_phone']?></li>
+            <li><b>E-mail:</b> <?=$invoice['customer_email']?></li>
+          </ul>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <caption>Payment Info</caption>
+        <tr>
+          <th>Invoice ID</th>
           <th>Price</th>
           <th>GST</th>
           <th>PST</th>
           <th>Total</th>
         </tr>
-        <?php foreach($cart as $value):?>
+        
         <tr>
-          <td><?=$customer['customer_id']?></td>
-          <td><?=$customer['first_name']?> <?=$customer['last_name']?></td>
-          <td><?=$customer['email']?></td>
-          <td><?=$_SESSION['cart'][$_SESSION['hotel_id']]['hotel_brand']?></td>
-          <td><?=$_SESSION['cart'][$_SESSION['hotel_id']]['hotel_name']?></td>
-          <td><?=$_SESSION['cart'][$_SESSION['hotel_id']]['price']?></td>
-          <td>0.05</td>
-          <td>0.08</td>
-          <td><?=$_SESSION['total']?></td>
+          <td><?=$invoice['invoice_id']?></td>
+          <td><?=$invoice['price']?></td>
+          <td><?=$invoice['GST']?></td>
+          <td><?=$invoice['PST']?></td>
+          <td><?=$invoice['total_price']?></td>
         </tr>
-      <?php endforeach;?>
+     
       </table>
     
       </div>

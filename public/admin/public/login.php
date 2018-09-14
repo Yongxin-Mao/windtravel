@@ -6,7 +6,7 @@ require '../includes/functions.php';
 $title = 'login';
 $slug = 'service';
 
-include '../includes/header.inc.php'; 
+
 //login
 if(!empty($_SESSION['logout'])){
 	$flash_message = $_SESSION['logout'];
@@ -16,15 +16,14 @@ if(!empty($_SESSION['fail'])){
 	$flash_message = $_SESSION['fail'];
 	unset($_SESSION['fail']);
 }
-use \Classes\Utility\Validator;
+use \Classes\Validator;
 $v=new Validator();
 
 //test fot post request
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $errors=[];
     
-    $v->required('email');
-    $v->validateEmail('email');
+    $v->required('user_name');
     
     $v->required('password');
     
@@ -35,14 +34,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   //query db for username
   $dbh=new PDO(DB_DSN, DB_USER, DB_PASS);
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $query='select
-              customer.customer_id,
-              customer.first_name,
-              customer.password,
-              customer.email
-              from customer
-              where email=:email';
-  $params=array(':email'=>$_POST['email']);
+  $query='select * from administration where user_name=:user_name';
+  $params=array(':user_name'=>$_POST['user_name']);
   $stmt=$dbh->prepare($query);
   $stmt->execute($params);
   $user=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -51,11 +44,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     //if they match
     //flag user as logged in
     $_SESSION['logged_in']=true;
-    $_SESSION['success']="Welcome back, ".ucfirst($user['first_name']).". You have successfully
-logged in.";
-    $_SESSION['user_id']=$user['customer_id'];
+    $_SESSION['success']="Hi, my dear admin. You have successfully logged in.";
+    $_SESSION['user_id']=$user['admin_id'];
     session_regenerate_id();
-    header('Location: profile.php');
+    header('Location: index.php');
     die;
   }else{
      $notice='Sorry, we have no record of these credencials.';
@@ -63,27 +55,64 @@ logged in.";
   }//check errors
 }//end check for post
 //var_dump($_SESSION);
-?>
- <style>
+
+?><!DOCTYPE html>
+<html lang="en">
+<head>
   
- </style>
- <body>
-    <!-- Start "wrapper" div. This will contain the entire web page.-->
-    <div id="wrapper">
+  <title>Wind Travel Admin</title>
+  <style>
+    body{
+      width: 1000px;
+      margin: 0 auto;
+    }
+    h1{
+      background: #0bb;
+      text-align: center;
+      padding: 35px 0;
+      height: 70px;
+      margin: 0;
+    }
+    #menu{
+      background: #ccc;
+      height: 580px;
+      width: 155px;
+      padding: 2px 20px;
+      float: left;
+    }
+    #menu a{
+      text-decoration: none;
+      color: #000;
+    }
+    #menu a:hover{
+      color: #099;
+    }
+    ul li, ol li{
+      line-height: 35px;
+    }
+    li{
+      font-size: 18px;
+      line-height: 25px;
+    }
+    #partone{
+      float: left;
+      padding-left: 20px;
+    }
+    iframe{
+      margin-top: 20px;
+    }
     
-      <!-- header begins-->
-      <header style="height: 300px;">
-        <img src="images/service.jpg" alt="Servicess" />
-    
-      </header>
-      
-<?php include '../includes/nav.inc.php'; ?>
-      
+  </style>
+  <script>
+
+  </script>
+</head>
+
+<body>
       <!-- content begins-->
-      <div id="contentservice">
-      <div class="titleservice">Welcome to WindTravel</div>
-      
-      <?php if(!empty($flash_message)) echo "<h3 style='text-align=center;'>Notice: $flash_message</h3>"; ?>
+      <h1>Administration Center for Wind Travel</h1>
+      <h2>Welcome to Wind Travel</h2>
+      <?php if(!empty($flash_message)) echo "<h3 style='text-align=center; color: #f00;'>$flash_message</h3>"; ?>
       
       <?php if(empty($success)): ?>
         <form method="post"
@@ -97,26 +126,26 @@ logged in.";
             <legend style="font-weight: bold;">Login Information</legend>
             
             <p style="text-align: center;">
-		      <label for="email" style="margin-left: -70px;">Email Address</label><br/>
+		      <label for="user_name" style="margin-left: -30px;">User Name</label><br/>
 		      <input type="text"
-					 name="email"
-				     id="email"
+					 name="user_name"
+				     id="user_name"
                      style="width: 282px; height: 30px; margin-left: -22px;"
                      value="<?php
-                     if(!empty($_POST['email'])){
-                       echo esc_attr($_POST['email']);
+                     if(!empty($_POST['user_name'])){
+                       echo esc_attr($_POST['user_name']);
                      }
                      ?>"/>
             </p>
-            <?php if(!empty($errors['email'])):?>
-            <span class="errors" style="margin-left: 285px;">
-              <?=ucfirst(esc($errors['email'][0]))?>
+            <?php if(!empty($errors['user_name'])):?>
+            <span class="errors" style="margin-left: 330px;">
+              <?=ucfirst(str_replace('_',' ',esc($errors['user_name'][0])))?>
             </span>
             <?php endif; ?>
 		    
             
             <p style="text-align: center; margin-top: 20px;">
-		      <label for="password" style="margin-left: -70px;">Password</label><br/>
+		      <label for="password" style="margin-left: -30px; ">Password</label><br/>
 		      <input type="password"
 					 name="password"
 				     id="password"
@@ -124,20 +153,20 @@ logged in.";
                      />
             </p>
             <?php if(!empty($errors['password'])):?>
-            <span class="errors" style="margin-left: 285px;">
+            <span class="errors" style="margin-left: 330px;">
               <?=ucfirst(str_replace('_',' ',esc($errors['password'][0])))?>
             </span>
             <?php elseif(isset($notice)): ?>
-		    <span class="errors" style="margin-left: 285px;">
+		    <span class="errors" style="margin-left: 330px;">
               <?=$notice?>
             </span>
             <?php endif; ?>
             
             <p id="button" style="text-align: center; margin-top: 40px;">
             <input type="submit" 
-                   value="Logggin"
+                   value="Login"
                    class="button"
-                   style="width: 300px;"
+                   style="width: 285px; height: 40px; margin-left: -12px;font-size:16px;"
                    />&nbsp;&nbsp;
           </p><br/><br/>
             
@@ -148,6 +177,7 @@ logged in.";
     
   <?php endif; ?>
     
-      </div>
-      
-<?php include '../includes/footer.inc.php'; ?>
+
+ </body>
+
+</html>

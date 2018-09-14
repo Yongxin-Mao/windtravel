@@ -132,6 +132,7 @@ class Validator
       $this->errors[$field_name][]="Sorry, here should be only 0 or 1.";
     }
   }
+  
   /**
   *@return
   */

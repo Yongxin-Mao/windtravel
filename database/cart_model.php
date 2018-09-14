@@ -25,3 +25,46 @@ function addToCart($dbh,$hotel_id)
   //$_SESSION['cart']=$cart;
   return $cart;
 }
+function getInvoice($dbh, $invoice_id)
+{
+	$query = "SELECT
+              invoice.invoice_id,
+              invoice.price,
+              invoice.GST,
+              invoice.PST,
+              invoice.total_price,
+              invoice.created_at,
+              hotel.hotel_brand,
+              hotel.hotel_name,
+              hotel.room,
+              hotel.bed,
+              hotel.adults,
+              hotel.children,
+              hotel.phone,
+              hotel.street,
+              hotel.city,
+              hotel.country,
+              hotel.rank,
+              hotel.breakfast_included,
+              hotel.smoke_permit,
+              hotel.image,
+              customer.first_name,
+              customer.last_name,
+              customer.street as customer_street,
+              customer.city as customer_city,
+              customer.province as customer_province,
+              customer.country as customer_country,
+              customer.phone as customer_phone,
+              customer.email as customer_email
+              FROM
+              invoice
+              JOIN customer USING(customer_id)
+              JOIN hotel USING(hotel_id)
+              WHERE
+              invoice_id = :invoice_id";
+	$stmt = $dbh->prepare($query);
+	$stmt->bindValue(':invoice_id', $invoice_id, PDO::PARAM_INT);
+	$stmt->execute();
+	// fetch one book
+	return $stmt->fetch(PDO::FETCH_ASSOC);
+}

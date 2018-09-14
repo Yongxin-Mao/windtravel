@@ -202,8 +202,9 @@ function updateHotel($dbh)
              image=:image,
              on_maintain=:on_maintain,
              log=:log,
-             deleted=:deleted
-            WHERE
+             deleted=:deleted,
+             updated_at=NOW()
+          WHERE
              hotel_id=:hotel_id";
     //prepare query
     $stmt=$dbh->prepare($query);
@@ -238,6 +239,7 @@ function updateHotel($dbh)
       return false;
     }
 }
+
 
 
 //create the function that can escape the output

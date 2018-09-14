@@ -31,7 +31,7 @@ if(!empty($_POST['hotel_id'])){
   //$_SESSION['cart'][]=$cart;
   //set the session for hotel id
   $_SESSION['hotel_id']=$_POST['hotel_id'];
-  $_SESSION['cart'][$cart['hotel_id']]=$cart;
+  $_SESSION['cart'][0]=$cart;
   //set the flash message content
   $_SESSION['addtocart']="You add an item in your cart successfully!";
   //$_POST['hotel_id']=array();

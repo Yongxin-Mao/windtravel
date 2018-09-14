@@ -15,10 +15,7 @@ if(!empty($_GET['hotel_id'])){
 $hotel=getHotel($dbh,$_GET['hotel_id']);
 }
 
-if(!empty($_SESSION['update'])){
-	$flash_message = $_SESSION['update'];
-	unset($_SESSION['update']);
-}
+
 /*
 Registration Form
 */
@@ -81,113 +78,24 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
    
     $errors=$v->errors();
     $hotel=$_POST;
-    var_dump($errors);
+   
   //if no errors
   if(count($errors)==0){
       updateHotel($dbh);
-      if(isset($_SESSION['update'])){
+      $_SESSION['update']="You've updated your record successfully!";
       $success=true;
     }else{
       die('There is a problem inserting the record');
     }
     //end if
   }//end test for post
-}
+
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Wind Travel Admin</title>
-  <meta charset="utf-8" />
-  <style>
-    body{
-      width: 1000px;
-      margin: 0 auto;
-    }
-    h1{
-      background: #0bb;
-      text-align: center;
-      padding: 35px 0;
-      height: 70px;
-      margin: 0;
-    }
-    #menu{
-      background: #ccc;
-      height: 580px;
-      width: 155px;
-      padding: 2px 20px;
-      float: left;
-    }
-    #menu a{
-      text-decoration: none;
-      color: #000;
-    }
-    #menu a:hover{
-      color: #099;
-    }
-    #content{
-      margin-left: 220px;
-    }
-    li{
-      font-size: 18px;
-      line-height: 25px;
-    }
-    #title{
-      text-align: center;
-    }
-    table{
-      width: 760px;
-      border-collapse: collapse;
-      text-align: center;
-    }
-    tr,th,td{
-      border: 1px solid #333;
-      height: 21px;
-    }
-    .button{
-      display: inline-block;
-      border: 1px solid #666;
-      background: #ccc;
-      width: 55px;
-      height: 19px;
-      padding-top: 2px;
-      border-radius: 3px 3px;
-    }
-    label{
-      width: 150px;
-      display: inline-block;
-    }
-  </style>
-  <script>
-
-  </script>
-</head>
-
-<body>
-  <h1>Administration Center for Wind Travel</h1>
-  <div id="menu">
-    <h1 style="height: 35px; width:134px; padding:10px;"><a href="index.php">Home</a></h1>
-    <h2><a>Hotels</a></h2>
-    <ul>
-      <li><a href="product.php">List ALL</a></li>
-      <li><a href="product_new.php">Create New</a></li>
-    </ul>
-    <h2><a>Customers</a></h2>
-    <ul>
-      <li><a href="#">List ALL</a></li>
-      <li><a href="#">Create New</a></li>
-    </ul>
-    <h2><a>Invoices</a></h2>
-    <ul>
-      <li><a href="#">List ALL</a></li>
-      <li><a href="#">Create New</a></li>
-    </ul>
-  </div>
-  
+<?php require '../includes/header.inc.php'?>
   <div id="content">
       <h2 id="title">Hotel Modification</h2>
-      <?php if(!empty($flash_message)) echo "<h3 style='text-align=center; color:#f00;'>Hi, $flash_message</h3>"; ?>
+      
       <?php if(empty($success)): ?>
       <form method="post"
             action="product_edt.php"
@@ -518,6 +426,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       <?php else: ?>
       <div style="width: 600px; margin-left:0;">
         <p><b>Successful New Record!</b></p>
+        <?php if(!empty($flash_message)) echo "<h3 style='text-align=center; color:#f00;'>Hi, $flash_message</h3>"; ?>
       </div>
         <?php endif; ?>
   </div>
