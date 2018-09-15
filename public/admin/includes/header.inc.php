@@ -54,7 +54,7 @@
   <header>
     <h1>Administration Center for Wind Travel</h1>
     <div id="utility" style="text-align: right; margin-right: 20px;">
-          <?php if(empty($_SESSION['logged_in'])):?>
+          <?php if(empty($_SESSION['logged'])):?>
             <a href="login.php" style="color: #fff; text-decoration: none;">Login</a>
           <?php else:?>
             Hi, Admin.&nbsp;&nbsp;&nbsp;<a href="logout.php" style="color: #fff; text-decoration: none;">Logout</a>

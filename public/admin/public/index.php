@@ -10,7 +10,7 @@
 require ('../config.php');
 require ('../database/connect_db.inc.php');
 require ('../model/model.php');
-if(!isset($_SESSION['logged_in'])){
+if(!isset($_SESSION['logged'])){
   $_SESSION['fail']="Sorry, You should login first.";
   header('Location: login.php');
   die;

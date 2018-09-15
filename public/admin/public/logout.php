@@ -22,7 +22,7 @@ header('Location: login.php');
 <body>
     <!-- Start "wrapper" div. This will contain the entire web page.-->
 
-    <?php if(empty($_SESSION['loggedin'])):?>
+    <?php if(empty($_SESSION['logged'])):?>
     <div style="text-align: center;padding-top: 100px;">
       <h3>Hi, Dear Sir or Madam:</h3>
       <p>Sorry. You are not logged in yet!</p>

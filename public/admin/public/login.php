@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   if(password_verify($_POST['password'],$user['password'])){
     //if they match
     //flag user as logged in
-    $_SESSION['logged_in']=true;
+    $_SESSION['logged']=true;
     $_SESSION['success']="Hi, my dear admin. You have successfully logged in.";
     $_SESSION['user_id']=$user['admin_id'];
     //session_regenerate_id();
